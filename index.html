@@ -4,13 +4,32 @@
     </head>
     <body>
         <p><button id="start">Start Capture</button>&nbsp;<button id="stop">Stop Capture</button></p>
-        <div id="vidcontainer" class="video">
-            <video id="video" height="1440px" width="2560px" autoplay></video>
+        <div class="outer-wrapper">
+            <div class="minimap">
+                <video id="minimap" height="1440px" width="2560px" autoplay></video>
+            </div>
+
+            <div class="inner-wrapper">
+                <div class="clock">
+                    <video id="clock" height="1440px" width="2560px" autoplay></video>
+                </div>
+                
+                <div class="skills">
+                    <video id="skills" height="1440px" width="2560px" autoplay></video>
+                </div>
+            </div>
+    
+            <div class="items">
+                <video id="items" height="1440px" width="2560px" autoplay></video>
+            </div>
         </div>
 
         <!-- Largely lifted and adapted from the Mozilla tutorial at https://developer.mozilla.org/en-US/docs/Web/API/Screen_Capture_API/Using_Screen_Capture -->
         <script>
-            const videoElem = document.getElementById("video");
+            const minimapElem = document.getElementById("minimap");
+            const skillsElem = document.getElementById("skills");
+            const itemsElem = document.getElementById("items");
+            const clockElem = document.getElementById("clock");
             const startElem = document.getElementById("start");
             const stopElem = document.getElementById("stop");
 
@@ -34,16 +53,32 @@
 
             async function startCapture() {
                 try {
-                    videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+                    let capture = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+                    minimapElem.srcObject = capture;
+                    skillsElem.srcObject = capture;
+                    itemsElem.srcObject = capture;
+                    clockElem.srcObject = capture;
                 } catch(err) {
                     console.error("Error: " + err);
                 }
             }
 
             function stopCapture(evt) {
-                let tracks = videoElem.srcObject.getTracks();
-                tracks.forEach(track => track.stop());
-                videoElem.srcObject = null;
+                let capturetracks = minimapElem.srcObject.getTracks();
+                capturetracks.forEach(track => track.stop());
+                minimapElem.srcObject = null;
+
+                let skillstracks = skillsElem.srcObject.getTracks();
+                skillstracks.forEach(track => track.stop());
+                skillsElem.srcObject = null;
+
+                let itemstracks = itemsElem.srcObject.getTracks();
+                itemstracks.forEach(track => track.stop());
+                itemsElem.srcObject = null;
+
+                let clocktracks = clockElem.srcObject.getTracks();
+                clocktracks.forEach(track => track.stop());
+                clockElem.srcObject = null;
             }
         </script>
     </body>

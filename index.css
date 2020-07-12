@@ -1,15 +1,70 @@
-.video {
-    border: 1px solid #999;
+div {
     position: relative;
-    height: 300px;
-    width: 300px;
     overflow: hidden;
 }
 
-#video {
+.outer-wrapper {
+    height: 350px;
+    width: 1000px;
+}
+
+.inner-wrapper {
+    height: 155px;
+    width: 350px;
+    display: inline-block;
+}
+
+.minimap {
+    height: 300px;
+    width: 300px;
+    display: inline-block;
+}
+
+.minimap video {
     -webkit-clip-path: inset(1128px 0px 0px 18px); 
     clip-path: inset(1128px 0px 0px 18px);
     position: absolute;
     top: -1128px;
     left: -18px;
+}
+
+.skills {
+    height: 100px;
+    width: 350px;
+}
+
+.skills video {
+    -webkit-clip-path: inset(1254px 0px 0px 1096px); 
+    clip-path: inset(1254px 0px 0px 1096px); 
+    position: absolute;
+    top: -1254px;
+    left: -1096px;
+}
+
+.items {
+    height: 175px;
+    width: 325px;
+    display: inline-block;
+}
+
+.items video {
+    -webkit-clip-path: inset(1254px 0px 0px 1455px); 
+    clip-path: inset(1254px 0px 0px 1096px); 
+    position: absolute;
+    top: -1254px;
+    left: -1455px;
+}
+
+.clock {
+    height: 55px;
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.clock video {
+    -webkit-clip-path: inset(0px 0px 0px 1230px); 
+    clip-path: inset(0px 0px 0px 1230px); 
+    position: absolute;
+    left: -1230px;
 }
