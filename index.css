@@ -1,0 +1,15 @@
+.video {
+    border: 1px solid #999;
+    position: relative;
+    height: 300px;
+    width: 300px;
+    overflow: hidden;
+}
+
+#video {
+    -webkit-clip-path: inset(1128px 0px 0px 18px); 
+    clip-path: inset(1128px 0px 0px 18px);
+    position: absolute;
+    top: -1128px;
+    left: -18px;
+}

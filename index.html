@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="index.css">
+    </head>
+    <body>
+        <p><button id="start">Start Capture</button>&nbsp;<button id="stop">Stop Capture</button></p>
+        <div id="vidcontainer" class="video">
+            <video id="video" height="1440px" width="2560px" autoplay></video>
+        </div>
+
+        <!-- Largely lifted and adapted from the Mozilla tutorial at https://developer.mozilla.org/en-US/docs/Web/API/Screen_Capture_API/Using_Screen_Capture -->
+        <script>
+            const videoElem = document.getElementById("video");
+            const startElem = document.getElementById("start");
+            const stopElem = document.getElementById("stop");
+
+            // Options for getDisplayMedia()
+
+            var displayMediaOptions = {
+                video: {
+                    cursor: "always"
+                },
+                audio: false
+            };
+
+            // Set event listeners for the start and stop buttons
+            startElem.addEventListener("click", function(evt) {
+                startCapture();
+            }, false);
+
+            stopElem.addEventListener("click", function(evt) {
+                stopCapture();
+            }, false);
+
+            async function startCapture() {
+                try {
+                    videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+                } catch(err) {
+                    console.error("Error: " + err);
+                }
+            }
+
+            function stopCapture(evt) {
+                let tracks = videoElem.srcObject.getTracks();
+                tracks.forEach(track => track.stop());
+                videoElem.srcObject = null;
+            }
+        </script>
+    </body>
+</html>
