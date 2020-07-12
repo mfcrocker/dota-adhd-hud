@@ -3,7 +3,6 @@
         <link rel="stylesheet" type="text/css" href="index.css">
     </head>
     <body>
-        <p><button id="start">Start Capture</button>&nbsp;<button id="stop">Stop Capture</button></p>
         <div class="outer-wrapper">
             <div class="minimap">
                 <video id="minimap" height="1440px" width="2560px" autoplay></video>
@@ -30,8 +29,6 @@
             const skillsElem = document.getElementById("skills");
             const itemsElem = document.getElementById("items");
             const clockElem = document.getElementById("clock");
-            const startElem = document.getElementById("start");
-            const stopElem = document.getElementById("stop");
 
             // Options for getDisplayMedia()
 
@@ -41,15 +38,6 @@
                 },
                 audio: false
             };
-
-            // Set event listeners for the start and stop buttons
-            startElem.addEventListener("click", function(evt) {
-                startCapture();
-            }, false);
-
-            stopElem.addEventListener("click", function(evt) {
-                stopCapture();
-            }, false);
 
             async function startCapture() {
                 try {
@@ -63,23 +51,7 @@
                 }
             }
 
-            function stopCapture(evt) {
-                let capturetracks = minimapElem.srcObject.getTracks();
-                capturetracks.forEach(track => track.stop());
-                minimapElem.srcObject = null;
-
-                let skillstracks = skillsElem.srcObject.getTracks();
-                skillstracks.forEach(track => track.stop());
-                skillsElem.srcObject = null;
-
-                let itemstracks = itemsElem.srcObject.getTracks();
-                itemstracks.forEach(track => track.stop());
-                itemsElem.srcObject = null;
-
-                let clocktracks = clockElem.srcObject.getTracks();
-                clocktracks.forEach(track => track.stop());
-                clockElem.srcObject = null;
-            }
+            window.onload = startCapture()
         </script>
     </body>
 </html>
